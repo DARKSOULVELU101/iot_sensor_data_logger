@@ -1,4 +1,4 @@
-# 🎮 Solo Leveling Student Analyzer
+# IOT SENSOR ANALYSIS
 
 ## 🚀 How to Run
 
@@ -6,7 +6,7 @@
 git clone https://github.com/YOUR_USERNAME/iot_sensor_data_logger.git
 
 ### 2. Enter Folder
-cd solo-leveling-student-analyzer
+cd iot_sensor_data_logger
 
 ### 3. Create Virtual Environment
 python -m venv venv
