@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-card"><h2>{{ title }}</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button primary" type="submit">Save Sensor</button> <a class="button" href="{% url 'sensors:sensor_list' %}">Cancel</a></form></section>
+{% endblock %}

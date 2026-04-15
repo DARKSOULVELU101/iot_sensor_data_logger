@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-title"><div><h2>Sensors</h2><p>Manage IoT device metadata and locations.</p></div><a class="button primary" href="{% url 'sensors:sensor_create' %}">Add Sensor</a></div>
+<section class="panel"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Type</th><th>Location</th><th>Installed</th><th>Readings</th><th>Active</th><th></th></tr></thead><tbody>{% for sensor in sensors %}<tr><td>{{ sensor.name }}</td><td>{{ sensor.get_sensor_type_display }}</td><td>{{ sensor.location }}</td><td>{{ sensor.installation_date }}</td><td>{{ sensor.reading_count }}</td><td>{{ sensor.is_active|yesno:'Yes,No' }}</td><td><a href="{% url 'sensors:sensor_update' sensor.pk %}">Edit</a></td></tr>{% empty %}<tr><td colspan="7">No sensors found.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

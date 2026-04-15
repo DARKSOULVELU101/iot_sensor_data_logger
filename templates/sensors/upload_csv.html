@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-card wide"><h2>Upload CSV Sensor Data</h2><p>Your CSV must include these columns: sensor_name, location, timestamp, temperature, humidity, pressure, battery_level, status.</p><form method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button class="button primary" type="submit">Import CSV</button></form><div class="sample-box"><h3>Example row</h3><code>Boiler Room Sensor A,Boiler Room,2026-04-15 10:00:00,39.5,61.2,1008.4,92.1,warning</code></div></section>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-card"><h2>Delete Reading</h2><p>Delete {{ reading.sensor.name }} reading from {{ reading.timestamp|date:'Y-m-d H:i' }}?</p><form method="post">{% csrf_token %}<button class="button danger-button" type="submit">Delete</button> <a class="button" href="{% url 'sensors:reading_list' %}">Cancel</a></form></section>
+{% endblock %}

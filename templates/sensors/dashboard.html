@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero">
+    <div><span class="eyebrow">Analytics ready dataset</span><h2>Monitor IoT readings and export clean data for Excel and Power BI</h2><p>This Django app stores timestamped sensor measurements, shows quick trends, and exports analysis-ready CSV or Excel files.</p></div>
+    <div class="hero-actions"><a class="button primary" href="{% url 'sensors:reading_create' %}">Add Reading</a><a class="button" href="{% url 'sensors:export_excel' %}">Download Excel</a></div>
+</section>
+<section class="stat-grid">
+    <article class="stat-card"><span>Total Sensors</span><strong>{{ stats.total_sensors }}</strong></article>
+    <article class="stat-card"><span>Active Sensors</span><strong>{{ stats.active_sensors }}</strong></article>
+    <article class="stat-card"><span>Total Readings</span><strong>{{ stats.total_readings }}</strong></article>
+    <article class="stat-card danger"><span>Critical Readings</span><strong>{{ stats.critical_readings }}</strong></article>
+</section>
+<section class="grid two"><article class="panel"><h3>Temperature and Humidity Timeline</h3><canvas id="timelineChart"></canvas></article><article class="panel"><h3>Readings by Status</h3><canvas id="statusChart"></canvas></article></section>
+<section class="grid two"><article class="panel"><h3>Average by Location</h3><canvas id="locationChart"></canvas></article><article class="panel"><h3>Summary</h3><dl class="summary-list"><div><dt>Average temperature</dt><dd>{{ summary.avg_temperature|floatformat:2 }} °C</dd></div><div><dt>Average humidity</dt><dd>{{ summary.avg_humidity|floatformat:2 }} %</dd></div><div><dt>Average pressure</dt><dd>{{ summary.avg_pressure|floatformat:2 }} hPa</dd></div><div><dt>Lowest battery</dt><dd>{{ summary.min_battery|floatformat:2 }} %</dd></div><div><dt>Highest temperature</dt><dd>{{ summary.max_temperature|floatformat:2 }} °C</dd></div></dl></article></section>
+<section class="panel"><h3>Recent Readings</h3><div class="table-wrap"><table><thead><tr><th>Sensor</th><th>Location</th><th>Time</th><th>Temp</th><th>Humidity</th><th>Battery</th><th>Status</th></tr></thead><tbody>{% for reading in recent_readings %}<tr><td>{{ reading.sensor.name }}</td><td>{{ reading.sensor.location }}</td><td>{{ reading.timestamp|date:'Y-m-d H:i' }}</td><td>{{ reading.temperature }} °C</td><td>{{ reading.humidity }} %</td><td>{{ reading.battery_level }} %</td><td><span class="badge {{ reading.status }}">{{ reading.status }}</span></td></tr>{% empty %}<tr><td colspan="7">No readings yet. Run the seed command or add readings manually.</td></tr>{% endfor %}</tbody></table></div></section>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IoT Sensor Data Logger</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="topbar">
+    <div><h1>IoT Sensor Data Logger</h1><p>Collect, export, and visualize industrial sensor readings</p></div>
+    <nav>
+        <a href="{% url 'sensors:dashboard' %}">Dashboard</a>
+        <a href="{% url 'sensors:sensor_list' %}">Sensors</a>
+        <a href="{% url 'sensors:reading_list' %}">Readings</a>
+        <a href="{% url 'sensors:upload_csv' %}">Upload CSV</a>
+        <a href="{% url 'sensors:export_csv' %}">CSV</a>
+        <a href="{% url 'sensors:export_excel' %}">Excel</a>
+    </nav>
+</header>
+<main class="container">
+    {% if messages %}<section class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</section>{% endif %}
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
